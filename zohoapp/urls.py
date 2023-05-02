@@ -34,6 +34,10 @@ urlpatterns = [
     path('api/customers/<str:name>/', customer_api_view),
     path('api/items/<str:name>/', item_api_view),
     
+    path('checkformgst',views.checkformgst,name='checkformgst'),
+    path('mytemplate',views.mytemplate,name='mytemplate'),
+
+    
 
     
 ]

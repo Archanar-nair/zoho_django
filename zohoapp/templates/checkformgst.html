@@ -1,0 +1,191 @@
+<!-- myapp/templates/tax_form.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tax Form</title>
+  </head>
+  <body>
+    <h1>Tax Form</h1>
+    
+    <form>
+      <label for="my-select">State:</label>
+      <select id="my-select" name="my-select">
+        <option value="">Select a state</option>
+        <option value="kerala">Kerala</option>
+        <option value="haryana">Haryana</option>
+      </select>
+      <br><br>
+      
+      <!-- <div id="tax_type_field" style="display:none;">
+        <label for="tax_type">Tax Type:</label>
+        <select id="tax_type" name="tax_type">
+          <option value="">Select a tax type</option>
+          <option value="gst">GST</option>
+          <option value="igst">IGST</option>
+        </select>
+      </div> -->
+      
+      <div id="gst_field" style="display:none;">
+        <label for="gst_percentage">tax Percentage:</label>
+        <select id="gst_percentage" name="gst_percentage">
+          <!-- <option value="">Select a GST percentage</option> -->
+          <option value="GST5[5%]">GST5[5%]</option>
+                  <option value="GST12[12%]">GST12[12%]</option>
+                  <option value="GST18[18%]">GST18[18%]</option>
+                  <option value="GST28[28%]">GST28[28%]</option>
+                  <option value="IGST0[0%]">IGST0[0%]</option>
+        </select>
+      </div>
+      
+      <div id="igst_field" style="display:none;">
+        <label for="igst_percentage">tax Percentage</label>
+        <select id="igst_percentage" name="igst_percentage">
+          <!-- <option value="">Select an IGST percentage</option> -->
+          <option value="IGST5[5%]">IGST5[5%]</option>
+          <option value="IGST12[12%]">IGST12[12%]</option>
+          <option value="IGST18[18%]">IGST18[18%]]</option>
+          <option value="IGST28[28%]">IGST28[28%]</option>
+        </select>
+      </div>
+      
+      <br><br>
+     
+      <button type="submit">Submit</button>
+    </form>
+  <script>
+    const mySelect = document.getElementById('my-select');
+
+function showTaxTypeField() {
+  var state = document.getElementById("state").value;
+        // var taxTypeField = document.getElementById("tax_type_field");
+        var gstField = document.getElementById("gst_field");
+        var igstField = document.getElementById("igst_field");
+        
+        if (state === "kerala") {
+          // taxTypeField.style.display = "block";
+          gstField.style.display = "block";
+          igstField.style.display = "none";
+        } else if (state === "haryana") {
+          // taxTypeField.style.display = "none";
+          gstField.style.display = "none";
+          igstField.style.display = "block";
+        } else {
+          // taxTypeField.style.display = "none";
+          gstField.style.display = "none";
+          igstField.style.display = "none";
+        }
+     
+      }
+
+function showForm() {
+  const state = document.getElementById("state").value;
+  let formHtml = "";
+
+  if (state === "Kerala") {
+    formHtml = `
+      <form>
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" name="subtotal">
+
+        <label for="csgt">CGST:</label>
+        <input type="number" id="csgt" name="csgt">
+
+        <label for="sgst">SGST:</label>
+        <input type="number" id="sgst" name="sgst">
+
+        <label for="grand-total">Grand Total:</label>
+        <input type="number" id="grand-total" name="grand-total">
+      </form>
+    `;
+  } else if (state === "Haryana") {
+    formHtml = `
+      <form>
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" name="subtotal">
+
+        <label for="igst">IGST:</label>
+        <input type="number" id="igst" name="igst">
+
+        <label for="grand-total">Grand Total:</label>
+        <input type="number" id="grand-total" name="grand-total">
+      </form>
+    `;
+  }
+
+  document.getElementById("gst-form").innerHTML = formHtml;
+}
+
+
+mySelect.addEventListener('change', showTaxTypeField);
+mySelect.addEventListener('change', showForm);
+
+
+  </script>
+    
+    <!-- <script>
+      function showTaxTypeField() {
+        var state = document.getElementById("state").value;
+        // var taxTypeField = document.getElementById("tax_type_field");
+        var gstField = document.getElementById("gst_field");
+        var igstField = document.getElementById("igst_field");
+        
+        if (state === "kerala") {
+          // taxTypeField.style.display = "block";
+          gstField.style.display = "block";
+          igstField.style.display = "none";
+        } else if (state === "haryana") {
+          // taxTypeField.style.display = "none";
+          gstField.style.display = "none";
+          igstField.style.display = "block";
+        } else {
+          // taxTypeField.style.display = "none";
+          gstField.style.display = "none";
+          igstField.style.display = "none";
+        }
+     
+      }
+    </script> -->
+
+<!-- <script>
+function showForm() {
+  const state = document.getElementById("state").value;
+  let formHtml = "";
+
+  if (state === "Kerala") {
+    formHtml = `
+      <form>
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" name="subtotal">
+
+        <label for="csgt">CGST:</label>
+        <input type="number" id="csgt" name="csgt">
+
+        <label for="sgst">SGST:</label>
+        <input type="number" id="sgst" name="sgst">
+
+        <label for="grand-total">Grand Total:</label>
+        <input type="number" id="grand-total" name="grand-total">
+      </form>
+    `;
+  } else if (state === "Haryana") {
+    formHtml = `
+      <form>
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" name="subtotal">
+
+        <label for="igst">IGST:</label>
+        <input type="number" id="igst" name="igst">
+
+        <label for="grand-total">Grand Total:</label>
+        <input type="number" id="grand-total" name="grand-total">
+      </form>
+    `;
+  }
+
+  document.getElementById("gst-form").innerHTML = formHtml;
+}
+</script> -->
+
+  </body>
+</html>

@@ -9,6 +9,7 @@ from zohoapp.models import Creditnote
 from django.http import JsonResponse
 from .models import Creditnote
 from django.shortcuts import get_object_or_404
+from decimal import Decimal
 
 
 
@@ -401,5 +402,19 @@ def item_api_view(request, name):
 
     # Return the data as a JSON response
     return JsonResponse(data)
+
+def checkformgst(request):
+    return render(request,'checkformgst.html')
+
+def mytemplate(request):
+    return render(request,'my_template.html')
+
+
+
+
+
+
+
+
 
 

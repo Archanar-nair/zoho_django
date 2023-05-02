@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="static/css/style.css"/>
 
     <title>Zoho Django</title>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       
 
     
@@ -31,7 +31,7 @@
               
                  
                   <form method="post">
-                    <!-- {% csrf_token %}  -->
+                    {% csrf_token %}
       
                    
 
@@ -90,19 +90,19 @@
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <div class="form-group">
-                          <label  style="color: aliceblue;">place of supply</label>
+                          <label for="state" style="color: aliceblue;">place of supply</label>
             
-                          <select style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control">
-                          
-                          <option> Kerala</option>
+                          <select id="state" name="state"  style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control" onchange="showTaxTypeField()">
+                            <option value="">Select a state</option>
+                          <option value="kerala">Kerala</option>
                           <option> Tamil Nadu</option>
                           <option> Andhra pradesh</option>
                           <option> karnataka</option>
                           <option> Maharashtra</option>
                           <option> Madhya Pradesh</option>
                           <option> orissa</option>
-                          <option> Haryana</option>
-                          <option> Himacha Pradesh</option>
+                          <option value="haryana">Haryana</option>
+                          <option> Himachal Pradesh</option>
                           <option> Delhi</option>
                           
                           </select>
@@ -152,16 +152,19 @@
     <label class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> HSN</label>
   </div>
   <div class="col">
-    <label class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Quantity</label>
+    <label for="quantity" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Quantity</label>
   </div>
   <div class="col">
-    <label id="item-price" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Price</label>
+    <label for="price" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Price</label>
+  </div>
+  <div class="col" >
+   
+    <label for="gst_percentage" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Tax(%)</label> 
+  
+ 
   </div>
   <div class="col">
-    <label class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Tax(%)</label>
-  </div>
-  <div class="col">
-    <label class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Total</label>
+    <label for="total" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> Total</label>
   </div>
 </div>
 <div class="row">
@@ -178,28 +181,43 @@
     <Input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
   </div>
   <div class="col">
-    <Input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" > 
+    <Input id="quantity" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" > 
   </div>
   <div class="col">
-    <Input id="item-price" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+    <Input id="price" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
   </div>
+  <div id="gst_field" class="col" > 
+   
+      
+        <!-- <label for="gst_percentage">Tax (%)</label> -->
+        <select class="form-control" id="gst_percentage" name="gst_percentage" style="background-color: rgb(80, 75, 75);color: aliceblue;" onchange="calculateGst()">
+          
+          <option value="5">GST5[5%]</option>
+                  <option value="12">GST12[12%]</option>
+                  <option value="18">GST18[18%]</option>
+                  <option value="28">GST28[28%]</option>
+                  <option value="0">GST0[0%]</option>
+        </select>
+      </div>
+      
+      <div class="col" id="igst_field" style="display:none;">
+        <!-- <label for="igst_percentage">Tax (%)</label> -->
+        <select class="form-control" id="igst_percentage" name="igst_percentage" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+          
+          <option value="5">IGST5[5%]</option>
+          <option value="12">IGST12[12%]</option>
+          <option value="18">IGST18[18%]]</option>
+          <option value="28">IGST28[28%]</option>
+        </select>
+      </div>
+    
+ 
+
   <div class="col">
-    <select name="intra" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" id="select1" placeholder="tax">
-      <option value="GST0[0%]">GST0[0%]</option>
-      <option value="GST5[5%]">GST5[5%]</option>
-      <option value="GST12[12%]">GST12[12%]</option>
-      <option value="GST18[18%]">GST18[18%]</option>
-      <option value="GST28[28%]">GST28[28%]</option>
-      <option value="IGST0[0%]">IGST0[0%]</option>
-<option value="IGST5[5%]">IGST5[5%]</option>
-<option value="IGST12[12%]">IGST12[12%]</option>
-<option value="IGST18[18%]">IGST18[18%]]</option>
-<option value="IGST28[28%]">IGST28[28%]</option>
-    </select>
-  </div>
-  <div class="col">
-    <Input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
-  </div>
+    <Input id="total" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+  
+  
+    </div>
 
 
 </div>
@@ -245,41 +263,101 @@
 
         <section style="margin-left: 900px;background-color: rgb(80, 75, 75);color: aliceblue;padding-left: 5px;text-align: center;padding-top: 15px;padding-bottom: 15px; margin-top: 30px;">
           <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-4 col-form-label">Subtotal :</label>
+            
+            <label for="subtotal" class="col-sm-4 col-form-label">Subtotal :</label>
             <div class="col-sm-5">
-              <input type="email" class="form-control" id="inputEmail3" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
+              <input type="number" class="form-control" id="subtotal" style="background-color:rgb(80, 75, 75);color: aliceblue ;" onchange="calculateGst()">
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-4 col-form-label">CGST :</label>
+            <label for="cgst" class="col-sm-4 col-form-label">CGST :</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="inputPassword3" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
+              <input type="number" id="cgst" readonly class="form-control" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-4 col-form-label">SGST :</label>
+            <label for="sgst" class="col-sm-4 col-form-label">SGST :</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="inputPassword3"style="background-color:rgb(80, 75, 75);color: aliceblue ;">
+              <input type="number" id="sgst" class="form-control" style="background-color:rgb(80, 75, 75);color: aliceblue ;" readonly>
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-4 col-form-label">Tax amount :</label>
+            <label for="tax_amount" class="col-sm-4 col-form-label">Tax amount :</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="inputPassword3" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
+              <input type="number" id="tax_amount" class="form-control" style="background-color:rgb(80, 75, 75);color: aliceblue ;" readonly>
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-4 col-form-label">Grand total :</label>
+            <label for="grand_total" class="col-sm-4 col-form-label">Grand total :</label>
             <div class="col-sm-5">
-              <input type="password" class="form-control" id="inputPassword3" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
+              <input type="number" id="grand_total" readonly class="form-control" style="background-color:rgb(80, 75, 75);color: aliceblue ;">
             </div>
           </div>
         </section>
+
         <button type="submit" style="border-radius: 5rem; margin-left: 1200px;background-color: rgb(68, 68, 190);margin-top: 30px;color: aliceblue;"> Submit form </button>
-        </form>
+    
+      </form>
 
+        <script>
+          function calculateTotal() {
+            var price = document.getElementById("price").value;
+            var quantity = document.getElementById("quantity").value;
+            var total = price * quantity;
+            var subtotal=price * quantity;
+            document.getElementById("total").value = total;
+            document.getElementById("subtotal").value = subtotal;
+          }
+          
+          document.getElementById("price").addEventListener("input", calculateTotal);
+          document.getElementById("quantity").addEventListener("input", calculateTotal);
+        </script>
 
+<script>
+  function showTaxTypeField() {
+    var state = document.getElementById("state").value;
+    
+    var gstField = document.getElementById("gst_field");
+    var igstField = document.getElementById("igst_field");
+    
+    if (state === "kerala") {
+      
+      gstField.style.display = "block";
+      igstField.style.display = "none";
+    } else if (state === "haryana") {
+      
+      gstField.style.display = "none";
+      igstField.style.display = "block";
+    } else {
+      
+      gstField.style.display = "none";
+      igstField.style.display = "none";
+    }
+ 
+  }
+</script>
 
+<script>
+  function calculateGst() {
+    // Get the selected GST percentage and the subtotal entered by the user
+    const gstPercentage = parseFloat(document.getElementById('gst_percentage').value);
+    const subtotal = parseFloat(document.getElementById('subtotal').value);
+  
+    // Calculate the CGST and SGST values
+    const cgst = (gstPercentage / 2) * subtotal / 100;
+    const sgst = cgst;
+  
+    // Calculate the tax amount and grand total
+    const taxAmount = gstPercentage * subtotal / 100;
+    const grandTotal = subtotal + taxAmount;
+  
+    // Update the CGST, SGST, tax amount, and grand total fields with the calculated values
+    document.getElementById('cgst').value = cgst.toFixed(2);
+    document.getElementById('sgst').value = sgst.toFixed(2);
+    document.getElementById('tax_amount').value = taxAmount.toFixed(2);
+    document.getElementById('grand_total').value = grandTotal.toFixed(2);
+  }
+</script>
 
 
 

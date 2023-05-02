@@ -1,2 +1,0 @@
-# zoho_django
-Project
