@@ -1,0 +1,54 @@
+<!-- myapp/templates/tax_form.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tax Form</title>
+  </head>
+  <body>
+    <h1>Tax Form</h1>
+    
+    <form>
+      <label for="state">State:</label>
+      <select id="state" name="state">
+        <option value="">Select a state</option>
+        <option value="kerala">Kerala</option>
+        <option value="haryana">Haryana</option>
+      </select>
+      <br><br>
+      <div id="tax_field"></div>
+    </form>
+    
+    <script>
+      var stateInput = document.getElementById("state");
+      var taxField = document.getElementById("tax_field");
+      
+      stateInput.onchange = function() {
+        var state = stateInput.value;
+        if (state === "kerala") {
+          taxField.innerHTML = `
+            <label for="gst_percentage">GST Percentage:</label>
+            <select id="gst_percentage" name="gst_percentage">
+              <option value="5">5%</option>
+              <option value="12">12%</option>
+              <option value="18">18%</option>
+              <option value="28">28%</option>
+            </select>
+          `;
+        } else if (state === "haryana") {
+          taxField.innerHTML = `
+            <label for="igst_percentage">IGST Percentage:</label>
+            <select id="igst_percentage" name="igst_percentage">
+              <option value="5">5%</option>
+              <option value="12">12%</option>
+              <option value="18">18%</option>
+              <option value="28">28%</option>
+            </select>
+          `;
+        } else {
+          taxField.innerHTML = "";
+        }
+      };
+    </script>
+  </body>
+</html>
