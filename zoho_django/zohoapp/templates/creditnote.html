@@ -285,69 +285,143 @@
   </div>
 </div>
 <button type="submit" style="border-radius: 5rem; margin-left: 1200px;background-color: rgb(68, 68, 190);margin-top: 30px;color: aliceblue;"> Submit form </button>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GST Form</title>
+</head>
+<body>
+
+
+<!-- HTML code for the dropdown menu -->
+<select id="state" onchange="stateChange()">
+  <option value="">Select a state</option>
+  <option value="Kerala">Kerala</option>
+  <option value="Haryana">Haryana</option>
+</select>
+
+<!-- HTML code for the first form -->
+<div id="form1" style="display: none;">
+  <label for="gst_percentage">Select GST percentage:</label>
+  <select id="gst_percentage" onchange="calculateGst()">
+    <option value="5">5%</option>
+    <option value="12">12%</option>
+    <option value="18">18%</option>
+    <option value="28">28%</option>
+  </select>
+  <br><br>
+  <label for="subtotal">Subtotal:</label>
+  <input type="number" id="subtotal" name="subtotal" onchange="calculateGst()">
+  <br><br>
+  <label for="cgst">CGST:</label>
+  <input type="number" id="cgst" name="cgst">
+  <br><br>
+  <label for="sgst">SGST:</label>
+  <input type="number" id="sgst" name="sgst">
+  <br><br>
+  <label for="tax_amount">Tax amount:</label>
+  <input type="number" id="tax_amount" name="tax_amount">
+  <br><br>
+  <label for="grand_total">Grand Total:</label>
+  <input type="number" id="grand_total" name="grand_total">
+  
+  
+</div>
+
+<!-- HTML code for the second form -->
+<div id="form2" style="display: none;">
+  <label for="igst_percentage">Select IGST percentage:</label>
+  <select id="igst_percentage" onchange="calculateIGst()">
+    <option value="5%">5%</option>
+    <option value="12%">12%</option>
+    <option value="18%">18%</option>
+    <option value="28%">28%</option>
+  </select>
+  <br><br>
+  <label for="subtotal2">Subtotal:</label>
+  <input type="number" id="subtotal2" name="subtotal2" onchange="calculateIGst()">
+  <br><br>
+  <label for="igst">IGST:</label>
+  <input type="number" id="igst" name="igst">
+  <br><br>
+  <label for="tax_amount2">Total tax:</label>
+  <input type="number" id="tax_amount2" name="tax_amount2">
+  <br><br>
+  <label for="grandtotal2">Grand Total:</label>
+  <input type="number" id="grandtotal2" name="grandtotal2">
+</div>
+
+<!-- JavaScript code to show/hide forms based on state selection -->
+<script>
+function stateChange() {
+  var state = document.getElementById("state").value;
+  if (state == "Kerala") {
+    document.getElementById("form1").style.display = "block";
+    document.getElementById("form2").style.display = "none";
+  } else if (state == "Haryana") {
+    document.getElementById("form1").style.display = "none";
+    document.getElementById("form2").style.display = "block";
+  } else {
+    document.getElementById("form1").style.display = "none";
+    document.getElementById("form2").style.display = "none";
+  }
+}
+</script>
+<script>
+  function calculateGst() {
+    // Get the selected GST percentage and the subtotal entered by the user
+    const gstPercentage = parseFloat(document.getElementById('gst_percentage').value);
+    const subtotal = parseFloat(document.getElementById('subtotal').value);
+  
+    // Calculate the CGST and SGST values
+    const cgst = (gstPercentage / 2) * subtotal / 100;
+    const sgst = cgst;
+  
+    // Calculate the tax amount and grand total
+    const taxAmount = gstPercentage * subtotal / 100;
+    const grandTotal = subtotal + taxAmount;
+  
+    // Update the CGST, SGST, tax amount, and grand total fields with the calculated values
+    document.getElementById('cgst').value = cgst.toFixed(2);
+    document.getElementById('sgst').value = sgst.toFixed(2);
+    document.getElementById('tax_amount').value = taxAmount.toFixed(2);
+    document.getElementById('grand_total').value = grandTotal.toFixed(2);
+  }
+</script>
+
+<script>
+  function calculateIGst() {
+    // Get the selected GST percentage and the subtotal entered by the user
+    const igstPercentage = parseFloat(document.getElementById('igst_percentage').value);
+    const subtotal2 = parseFloat(document.getElementById('subtotal2').value);
+  
+    // Calculate the CGST and SGST values
+    const igst = (igstPercentage) * subtotal2 / 100;
     
+  
+    // Calculate the tax amount and grand total
+    const taxAmount = (igstPercentage) * subtotal2 / 100;
+    const grandTotal = subtotal2 + taxAmount;
+  
+    // Update the CGST, SGST, tax amount, and grand total fields with the calculated values
+    document.getElementById('igst').value = igst.toFixed(2);
+   
+    document.getElementById('tax_amount2').value = taxAmount.toFixed(2);
+    document.getElementById('grandtotal2').value = grandTotal.toFixed(2);
+  }
+</script>
+
+
+
+ 
 
 
 
 
       </form>
 
-      <select id="state" onchange="stateChange()">
-        <option value="">Select a state</option>
-        <option value="Kerala">Kerala</option>
-        <option value="Haryana">Haryana</option>
-      </select>
-      
-      <!-- HTML code for the first form -->
-      <div id="form1" style="display: none;">
-        <label for="gst_percentage">Select GST percentage:</label>
-        <select id="gst_percentage" onchange="calculateGst()">
-          <option value="5">5%</option>
-          <option value="12">12%</option>
-          <option value="18">18%</option>
-          <option value="28">28%</option>
-        </select>
-        <br><br>
-        <label for="subtotal">Subtotal:</label>
-        <input type="number" id="subtotal" name="subtotal" onchange="calculateGst()">
-        <br><br>
-        <label for="cgst">CGST:</label>
-        <input type="number" id="cgst" name="cgst">
-        <br><br>
-        <label for="sgst">SGST:</label>
-        <input type="number" id="sgst" name="sgst">
-        <br><br>
-        <label for="tax_amount">Tax amount:</label>
-        <input type="number" id="tax_amount" name="tax_amount">
-        <br><br>
-        <label for="grand_total">Grand Total:</label>
-        <input type="number" id="grand_total" name="grand_total">
-        
-        
-      </div>
-      
-      <!-- HTML code for the second form -->
-      <div id="form2" style="display: none;">
-        <label for="igst_percentage">Select IGST percentage:</label>
-        <select id="igst_percentage" onchange="calculateIGst()">
-          <option value="5%">5%</option>
-          <option value="12%">12%</option>
-          <option value="18%">18%</option>
-          <option value="28%">28%</option>
-        </select>
-        <br><br>
-        <label for="subtotal2">Subtotal:</label>
-        <input type="number" id="subtotal2" name="subtotal2" onchange="calculateIGst()">
-        <br><br>
-        <label for="igst">IGST:</label>
-        <input type="number" id="igst" name="igst">
-        <br><br>
-        <label for="tax_amount2">Total tax:</label>
-        <input type="number" id="tax_amount2" name="tax_amount2">
-        <br><br>
-        <label for="grandtotal2">Grand Total:</label>
-        <input type="number" id="grandtotal2" name="grandtotal2">
-      </div>
+
 
 <script>
   // Get the select element for the customer name
@@ -400,6 +474,7 @@
             var subtotal=price * quantity;
             document.getElementById("total").value = total;
             document.getElementById("subtotal").value = subtotal;
+            document.getElementById("subtotal2").value = subtotal2;
           }
           
           document.getElementById("price").addEventListener("input", calculateTotal);
