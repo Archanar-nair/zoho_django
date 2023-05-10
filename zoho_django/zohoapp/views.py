@@ -356,11 +356,21 @@ def creditnote(request):
    
     return render(request,'creditnote.html')
 
+def credit_note(request):
+
+   
+    return render(request,'credit_note.html')
+
+def check(request):
+
+   
+    return render(request,'check.html')
+
 
 def notedetails(request):
     if request.method=='POST':
         customer=Creditnote.objects.all()
-        name=customer.customername
+        name=request.POST['name']
         emails=customer.email
         addressc=customer.address
         invoice_number=request.POST['invoice']

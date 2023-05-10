@@ -36,6 +36,9 @@ urlpatterns = [
     
     path('checkformgst',views.checkformgst,name='checkformgst'),
     path('mytemplate',views.mytemplate,name='mytemplate'),
+    path('credit_note',views.credit_note,name='credit_note'),
+    path('check',views.check,name='check'),
+    path('notedetails',views.notedetails,name='notedetails'),
 
     
 
