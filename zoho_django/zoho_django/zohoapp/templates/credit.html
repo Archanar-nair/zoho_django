@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="static/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+	  <link rel="stylesheet" type="static/text/css" href="css/nunito-font.css">
+    <link rel="stylesheet" href="static/css/style.css"/>
+
+    <title>Zoho Django</title>
+</head>
+<body>
+
+
+    <div class="container " style="background-color: rgb(80, 75, 75); margin-top: 20px; margin-left: 250px;" > 
+        <div class="row d-flex justify-content-left align-items-center h-100" >
+          <div class="col-lg-8 col-xl-6">
+
+<form method="post">
+                    <!-- {% csrf_token %}  -->
+      
+                   
+
+      
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label for="name" style="color: aliceblue;"> customer name</label>
+            
+                          <select style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control" placeholder="Enter Username" name="uname">
+                            <option> customer1</option>
+                            <option> customer2</option>
+                          </select>
+                        </div>
+                       
+                          
+                        </div>
+      
+                      
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label for="email" style="color: aliceblue;">Email</label>
+                          <input style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text" class="form-control" placeholder="Enter email" name="email" >
+                          
+                        </div>
+                        
+      
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label style="color: aliceblue;"> Address</label>
+            
+                          <textarea style="background-color:rgb(80, 75, 75) ;" type="text"  class="form-control">
+                          </textarea>
+                        </div>
+                       
+                          
+                        </div>
+      
+                      
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label for="date" style="color: aliceblue;">Credit note date</label>
+                          <input type="date" style="background-color:rgb(80, 75, 75) ;color: aliceblue;"  class="form-control" placeholder="date" >
+                          
+                        </div>
+                        
+      
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label  style="color: aliceblue;">place of supply</label>
+            
+                          <input style="background-color:rgb(80, 75, 75) ;" type="text"  class="form-control">
+                          
+                        </div>
+                       
+                          
+                        </div>
+      
+                      
+                      <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                          <label type="number" style="color: aliceblue;">Invoice number</label>
+                          <input style="background-color:rgb(80, 75, 75) ;" type="text" class="form-control">
+                          
+                        </div>
+                        
+      
+                      </div>
+                    </div>
+          
+                    
+                  
+                  
+                  
+                  </form>
+
+
+          </div>
+        </div>
+    </div>
+
+      
+
+    
+  
+  
+ 
+
+<h2 style="margin-left: 250px;"> Item Details</h2>
+        <table class="table" style="background-color: rgb(80, 75, 75);color: aliceblue; margin-left: 250px;">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Item</th>
+              <th scope="col">HSN</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Tax(%)</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+   
+            <tr>
+
+                <td >
+              <input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+            </td>    
+             <td > <select class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+                  {% for i in items %}
+              <option> 
+                {{i.Name}}
+
+              </option>
+              {% endfor %}
+             </select> </td>
+             <td>
+              <input type=text class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+            </td>
+            <td>
+              <input type=text class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+            </td>
+              <td><input type=text class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"></td>
+              <td>
+                
+                <select name="intra" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" id="select1" placeholder="tax">
+                  <option value="GST0[0%]">GST0[0%]</option>
+                  <option value="GST5[5%]">GST5[5%]</option>
+                  <option value="GST12[12%]">GST12[12%]</option>
+                  <option value="GST18[18%]">GST18[18%]</option>
+                  <option value="GST28[28%]">GST28[28%]</option>
+                  <option value="IGST0[0%]">IGST0[0%]</option>
+          <option value="IGST5[5%]">IGST5[5%]</option>
+          <option value="IGST12[12%]">IGST12[12%]</option>
+          <option value="IGST18[18%]">IGST18[18%]]</option>
+          <option value="IGST28[28%]">IGST28[28%]</option>
+                </select>
+              </td>
+              <td>
+                
+                <input type=text class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;">
+              </td>
+             
+             
+            </tr>
+          
+          </tbody>
+
+
+          
+        </table>
+    </body>
+    </html>
+
