@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2  class = 'text-center mb-3 p-1 my-2' style="margin-top: 80px;color: rgb(90, 13, 161);">
+       Show users</h2>
+       <table class="table table-striped" style="background-color: aliceblue;">
+    
+        <thead class = "mt-3 p-1" style="background-color: rgb(90, 13, 161); color:azure;">
+                              <tr>
+                                <th> Date</th>
+                                <th> Credit number</th>
+                                <th> Customer</th>
+                               
+                                <th> Tax Amount</th>
+                                <th> Total Amount</th>
+                                
+
+
+                                  
+
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for t in user %}
+
+                            <tr>
+                               
+                                <td>{{t.date}} </td>
+                                <td>{{t.invoice_number}} </td>
+                                <td> <a href="{% url 'customerviewtable' %}"> {{t.customerlist_id}}</a></td>
+                                <td>{{t.tax}} </td>
+                        
+                                <td>{{t.total}}</td>
+                                
+                                
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+    
+        
+       
+
+{% endblock %}

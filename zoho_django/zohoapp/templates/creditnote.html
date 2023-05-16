@@ -30,7 +30,7 @@
             <div class="col-lg-8 col-xl-6">
               
                  
-                  <form method="post" action="{% url 'notedetails' %}">
+                  <form method="post" action="{% url 'creditnote_view' %}">
                     {% csrf_token %}
       
                    
@@ -41,10 +41,10 @@
                         <div class="form-group">
                           <label for="name" style="color: aliceblue;"> customer name</label>
             
-                          <select id="customer-name" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control">
-                            <option></option>
-                            <option> customer1</option>
-                            <option> customer2</option>
+                          <select id="customer-name" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control" name="name">
+                            {% for i in customer %}
+                            <option > {{i.customername}}</option>
+                           {% endfor %}
                           </select>
                         </div>
                        
@@ -55,7 +55,7 @@
                       <div class="col-md-6 mb-4">
                         <div class="form-group">
                           <label for="customer-email" style="color: aliceblue;">Email</label>
-                          <input id="customer-email" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text" class="form-control" >
+                          <input id="customer-email" name="cemail" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text" class="form-control" >
                           
                         </div>
                         
@@ -68,7 +68,7 @@
                         <div class="form-group">
                           <label for="customer-address" style="color: aliceblue;"> Address</label>
             
-                          <textarea id="customer-address" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control">
+                          <textarea id="customer-address" name="caddress" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text"  class="form-control">
                           </textarea>
                         </div>
                        
@@ -78,8 +78,8 @@
                       
                       <div class="col-md-6 mb-4">
                         <div class="form-group">
-                          <label for="date" style="color: aliceblue;">Credit note date</label>
-                          <input type="date" style="background-color:rgb(80, 75, 75) ;color: aliceblue;"  class="form-control" placeholder="date" >
+                          <label for="cdate" style="color: aliceblue;">Credit note date</label>
+                          <input type="date" name="cdate" style="background-color:rgb(80, 75, 75) ;color: aliceblue;"  class="form-control" placeholder="date" >
                           
                         </div>
                         
@@ -117,7 +117,7 @@
                       <div class="col-md-6 mb-4">
                         <div class="form-group">
                           <label type="number" style="color: aliceblue;">Invoice number</label>
-                          <input style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text" class="form-control" name="invoice">
+                          <input name="inumber" style="background-color:rgb(80, 75, 75) ;color: aliceblue;" type="text" class="form-control" name="invoice">
                           
                         </div>
                         
@@ -125,7 +125,7 @@
                       </div>
                     </div>
           
-                    
+                    <h2 style="margin-left: 300px;"> credit amount:  </h2>
                   
                   
                   
@@ -170,27 +170,28 @@
 </div>
 <div class="row">
   <div class="col">
-    <Input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+    <Input type="number" name="itemid" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
   </div>
   <div class="col">
-    <select id="item-name" type="text" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+    <select id="item-name" name="itemname" type="text" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
       <option> Nail polish</option>
       <option> powder</option>
     </select>
   </div>
   <div class="col">
-    <Input type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+    <Input type="number" name="hsnnumber" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
   </div>
   <div class="col">
-    <Input id="quantity" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" > 
+    <Input id="quantity" name="quantityn" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;" > 
   </div>
   <div class="col">
-    <Input id="price" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
+    <Input id="price" name="pricen" type="number" class="form-control" style="background-color: rgb(80, 75, 75);color: aliceblue;"> 
   </div>
   <!-- <div id="gst_field" class="col" >  -->
     <div class="col" id="form1" style="display: none;" >
       <!-- <label for="gst_percentage">Select GST percentage:</label> -->
       <select class="form-control" id="gst_percentage" onchange="calculateGst()" style="background-color: rgb(80, 75, 75);color: aliceblue;" >
+        <option value="">choose</option>
         <option value="5">GST5[5%]</option>
                   <option value="12">GST12[12%]</option>
                   <option value="18">GST18[18%]</option>
@@ -222,6 +223,7 @@
     <div class="col" id="form2" style="display: none;">
       <!-- <label for="igst_percentage">Select IGST percentage:</label> -->
       <select class="form-control" id="igst_percentage" onchange="calculateIGst()" style="background-color: rgb(80, 75, 75);color: aliceblue;" >
+        <option value="">choose</option>
         <option value="5">IGST5[5%]</option>
         <option value="12">IGST12[12%]</option>
         <option value="18">IGST18[18%]]</option>
@@ -230,7 +232,7 @@
     
       <br>
       <!-- <section style="margin-left: 900px;background-color: rgb(80, 75, 75);color: aliceblue;padding-left: 5px;text-align: center;padding-top: 15px;padding-bottom: 15px; margin-top: 30px;"> -->
-        <section style="background-color: rgb(53, 63, 63);color: aliceblue;"> 
+        <section style="background-color: rgb(53, 63, 63); color: aliceblue;"> 
       <label for="subtotal2" class="col-sm-4 col-form-label">Subtotal:</label>
       
       <input class="form-control" type="number" id="subtotal2" name="subtotal2" onchange="calculateIGst()">
@@ -239,7 +241,7 @@
         
       <label for="igst" class="col-sm-4 col-form-label">IGST:</label>
 
-      <input class="form-control" type="number" id="igst" name="igst">
+      <input class="form-control" type="number" id="igst">
       
    
       <label for="tax_amount2" class="col-sm-4 col-form-label">Total tax:</label>
@@ -303,6 +305,7 @@
       document.getElementById('sgst').value = sgst.toFixed(2);
       document.getElementById('tax_amount').value = taxAmount.toFixed(2);
       document.getElementById('grand_total').value = grandTotal.toFixed(2);
+      
     }
   </script>
   
@@ -317,13 +320,13 @@
       
     
       // Calculate the tax amount and grand total
-      const taxAmount = (igstPercentage) * subtotal2 / 100;
-      const grandTotal = subtotal2 + taxAmount;
+      const tax_Amount = (igstPercentage) * subtotal2 / 100;
+      const grandTotal = subtotal2 + tax_Amount;
     
       // Update the CGST, SGST, tax amount, and grand total fields with the calculated values
       document.getElementById('igst').value = igst.toFixed(2);
      
-      document.getElementById('tax_amount2').value = taxAmount.toFixed(2);
+      document.getElementById('tax_amount2').value = tax_Amount.toFixed(2);
       document.getElementById('grandtotal2').value = grandTotal.toFixed(2);
     }
   </script>
@@ -383,6 +386,7 @@
             var quantity = document.getElementById("quantity").value;
             var total = price * quantity;
             var subtotal=price * quantity;
+            var subtotal2=price * quantity;
             document.getElementById("total").value = total;
             document.getElementById("subtotal").value = subtotal;
             document.getElementById("subtotal2").value = subtotal2;
@@ -397,3 +401,4 @@
 
 </body>
   </html>
+  

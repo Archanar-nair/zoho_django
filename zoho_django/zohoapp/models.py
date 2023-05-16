@@ -81,14 +81,20 @@ class Creditnote(models.Model):
     customername=models.CharField(max_length=255, null=True)
     email=models.CharField(max_length=255, null=True)
     address=models.CharField(max_length=255, null=True)
+    
+
+class Item(models.Model):
+    customerlist=models.ForeignKey(Creditnote,on_delete=models.CASCADE)
     invoice_number=models.IntegerField(null=True)
-    itemid=models.IntegerField(null=True)
+    date=models.DateField(null=True)
+    
     itemname=models.CharField(max_length=255, null=True)
     hsn=models.IntegerField(null=True)
     quantity = models.PositiveIntegerField(null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2,null=True)
     tax = models.DecimalField(max_digits=8, decimal_places=2,null=True)
     total = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+
 
 
 

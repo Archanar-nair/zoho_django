@@ -5,9 +5,9 @@ from django.contrib.auth.models import User,auth
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from zohoapp.models import Creditnote
+from zohoapp.models import Creditnote,Item
 from django.http import JsonResponse
-from .models import Creditnote
+from .models import Creditnote, Item
 from django.shortcuts import get_object_or_404
 from decimal import Decimal
 
@@ -352,9 +352,10 @@ def add_sales(request):
 
 
 def creditnote(request):
+    customer=Creditnote.objects.all()
 
    
-    return render(request,'creditnote.html')
+    return render(request,'creditnote.html',{'customer':customer})
 
 def credit_note(request):
 
@@ -370,18 +371,18 @@ def check(request):
 def notedetails(request):
     if request.method=='POST':
         customer=Creditnote.objects.all()
-        name=request.POST['name']
+        name=customer.customername
         emails=customer.email
         addressc=customer.address
-        invoice_number=request.POST['invoice']
-        item_name=request.POST['name']
-        hsn_no=request.POST['hsn']
-        quantities=request.POST['quantity']
-        item_price=request.POST['price']
-        item_tax=request.POST['tax']
-        totalamount=request.POST['total']
+        # invoice_number=request.POST['inumber']
+        # item_name=request.POST['name']
+        # hsn_no=request.POST['hsnnumber']
+        # quantities=request.POST['quantityn']
+        # item_price=request.POST['pricen']
+        # item_tax=request.POST['tax']
+        # totalamount=request.POST['total']
          
-        customers=Creditnote(customername=name,email=emails,address=addressc,invoicenumber=invoice_number,name=item_name,hsn=hsn_no,quantity=quantities,price=item_price,tax=item_tax,total=totalamount)
+        customers=Creditnote(customername=name,email=emails,address=addressc)
         customers.save
         return render(request,'creditnote.html')
     return render(request,'credit_notes.html')
@@ -413,11 +414,45 @@ def item_api_view(request, name):
     # Return the data as a JSON response
     return JsonResponse(data)
 
+def creditnote_view(request):
+    if request.method=='POST':
+        
+        sel=request.POST['name']
+        customer=Creditnote.objects.get(customername=sel)
+        
+        
+        invoice_num=request.POST['inumber']
+        creditdate=request.POST['cdate']
+        item_name=request.POST['itemname']
+        hsn_no=request.POST['hsnnumber']
+        quantities=request.POST['quantityn']
+        item_price=request.POST['pricen']
+        item_tax=request.POST['tax_amount']
+        totalamount=request.POST['grand_total']
+        item=Item(customerlist=customer,invoice_number=invoice_num,date=creditdate,itemname=item_name,hsn=hsn_no,quantity=quantities,price=item_price,tax=item_tax,total=totalamount)
+        item.save()
+        return redirect('creditnote')
+    return render(request,'creditnote.html')
+
+    
+
+
 def checkformgst(request):
     return render(request,'checkformgst.html')
 
 def mytemplate(request):
     return render(request,'my_template.html')
+def study_base(request):
+    return render(request,'study_base.html')
+
+def customerviewtable(request):
+        
+    user1=Item.objects.all()
+    return render(request,'customerviewtable.html',{'user': user1})
+
+def invoice(request):
+    return render(request, 'invoice.html')
+    
 
 
 
