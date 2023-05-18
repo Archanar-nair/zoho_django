@@ -452,6 +452,13 @@ def customerviewtable(request):
 
 def invoice(request):
     return render(request, 'invoice.html')
+
+def customer_invoice(request):
+    if request.user.is_authenticated:
+        customerid=Creditnote.objects.all()
+        details=Item.objects.all()
+        
+        return render(request,'invoice.html',{'customerid':customerid},{'details':details})
     
 
 
