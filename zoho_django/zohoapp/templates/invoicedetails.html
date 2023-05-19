@@ -28,7 +28,7 @@
                                
                                 <td>{{t.date}} </td>
                                 <td>{{t.invoice_number}} </td>
-                                <td> <a href="{% url 'invoicedetails'  %}"> {{t.customerlist_id}}</a></td>
+                                <td> <a href="{% url 'invoice' user %}"> {{t.customerlist_id}}</a></td>
                                 <td>{{t.tax}} </td>
                         
                                 <td>{{t.total}}</td>

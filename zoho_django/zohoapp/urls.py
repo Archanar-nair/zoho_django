@@ -42,8 +42,9 @@ urlpatterns = [
     path('study_base',views.study_base,name='study_base'),
     path('creditnote_view',views.creditnote_view,name='creditnote_view'),
     path('customerviewtable',views.customerviewtable,name='customerviewtable'),
-    path('invoice',views.invoice,name='invoice')
-
+    path('invoice',views.invoice,name='invoice'),
+     path('invoicedetails/<id:pk>/',views.invoicedetails,name='invoicedetails'),
+    
 
     
 
