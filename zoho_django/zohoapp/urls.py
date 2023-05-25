@@ -43,7 +43,7 @@ urlpatterns = [
     path('creditnote_view',views.creditnote_view,name='creditnote_view'),
     path('customerviewtable',views.customerviewtable,name='customerviewtable'),
     path('invoice',views.invoice,name='invoice'),
-     path('invoicedetails/<id:pk>/',views.invoicedetails,name='invoicedetails'),
+     path('invoicedetails/',views.invoicedetails,name='invoicedetails'),
     
 
     

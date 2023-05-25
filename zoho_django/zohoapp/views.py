@@ -456,10 +456,10 @@ def invoice(request):
         details=Item.objects.all()
         return render(request,'invoice.html',{'customerid':customerid},{'details':details})
     return redirect('customerviewtable')
-def invoicedetails(request,pk):
+def invoicedetails(request):
         
-    user1=Item.objects.get(customerlist_id=pk)
-    return render(request,'invoicedetails.html',{'user': user1})
+    
+    return render(request,'invoicedetails.html')
 
 
     
